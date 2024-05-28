@@ -10,33 +10,32 @@ struct Course {
     int credit;
 };
 
-double convertMarksToGPA(double marks) {
-    if (marks > 80) return 4.00;
-    else if (marks > 75) return 3.75;
-    else if (marks > 70) return 3.50;
-    else if (marks > 65) return 3.25;
-    else if (marks > 60) return 3.00;
-    else if (marks > 55) return 2.75;
-    else if (marks > 50) return 2.50;
-    else if (marks > 45) return 2.25;
-    else if (marks > 40) return 2.00;
-    else if (marks > 32) return 1.75;
-    else return 0.0;
+void convertMarksToGPA(double marks, double &grade, string &letterGrade) {
+    if (marks > 80) {
+        grade = 4.00, letterGrade = "A+";
+    } else if (marks > 75) {
+        grade = 3.75, letterGrade = "A";
+    } else if (marks > 70) {
+        grade = 3.50, letterGrade = "A-";
+    } else if (marks > 65) {
+        grade = 3.25, letterGrade = "B+";
+    } else if (marks > 60){
+        grade = 3.00, letterGrade = "B";
+    } else if (marks > 55){
+        grade = 2.75, letterGrade = "B-";
+    } else if (marks > 50){
+        grade = 2.50, letterGrade = "C+";
+    } else if (marks > 45){
+        grade = 2.25, letterGrade = "C";
+    } else if (marks > 40){
+        grade = 2.00, letterGrade = "C-";
+    } else if (marks > 32){
+        grade = 1.75, letterGrade = "D";
+    } else {
+        grade = 0.0, letterGrade = "F";
+    }
 }
 
-string convertMarksToLetterGrade(double marks) {
-    if (marks > 80) return "A+";
-    else if (marks > 75) return "A";
-    else if (marks > 70) return "A-";
-    else if (marks > 65) return "B+";
-    else if (marks > 60) return "B";
-    else if (marks > 55) return "B-";
-    else if (marks > 50) return "C+";
-    else if (marks > 45) return "C";
-    else if (marks > 40) return "C-";
-    else if (marks > 32) return "D";
-    else return "F";
-}
 
 double calculateCGPA(const vector<Course>& courses) {
     double totalGradePoints = 0.0;
@@ -71,8 +70,7 @@ int main() {
         cout << "Enter the marks for " << course.name << " (out of 100): ";
         cin >> course.marks;
 
-        course.grade = convertMarksToGPA(course.marks);
-        course.letterGrade = convertMarksToLetterGrade(course.marks);
+       convertMarksToGPA(course.marks, course.grade, course.letterGrade);
 
         cout << "Enter the credit hours for " << course.name << ": ";
         cin >> course.credit;
@@ -84,11 +82,11 @@ int main() {
     cout << "\nGrades and GPA for each course:\n";
     cout << "--------------------------------\n";
     for (const auto& course : courses) {
-        cout << "Course: " << course.name
-             << ", Marks: " << course.marks
-             << ", GPA: " << fixed << setprecision(2) << course.grade
-             << ", Letter Grade: " << course.letterGrade
-             << ", Credit Hours: " << course.credit << endl;
+        cout << "Course: " << course.name << endl;
+        cout << " Marks: " << course.marks << endl;
+        cout << " GPA: " << fixed << setprecision(2) << course.grade << endl;
+        cout << " Letter Grade: " << course.letterGrade << endl;
+        cout << " Credit Hours: " << course.credit << endl;
     }
 
     double cgpa = calculateCGPA(courses);
