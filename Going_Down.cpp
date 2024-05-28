@@ -4,14 +4,11 @@ using namespace std;
 
 int GD(int m, int n) {
 
+	if (n == m) {
+		return n * n;
+	}
 
-	return (m == n) ? n * n : ((n * n) + GD(m, n - 1));
-
-	// if (n == m) {
-	// 	return n * n;
-	// }
-
-	// return n * n + GD(m, n - 1);
+	return n * n + GD(m, n - 1);
 }
 
 int main() {
